@@ -1,0 +1,19 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+    <title>CSV Upload</title>
+</head>
+<body>
+    <h1>Upload a CSV File</h1>
+    <form method="POST" enctype="multipart/form-data" action="{% url 'index' %}">
+        {% csrf_token %}
+        <input type="file" name="csv" required>
+        <button type="submit">Generate Report</button>
+    </form>
+</body>
+</html>
