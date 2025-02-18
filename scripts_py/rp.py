@@ -7,7 +7,7 @@ import re
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-def report(csv_file="rainfall_data_analysis/1901_1999_csv/1901uk.csv"):
+def report(csv_file):
     """
     Purpose: Generate a profiling report from a CSV file
     """
@@ -30,6 +30,39 @@ def report(csv_file="rainfall_data_analysis/1901_1999_csv/1901uk.csv"):
         print(logger.error(f"Error in report generation: {str(e)}"))
         raise
 
+
+def time_series(csv_file):
+    """
+    Purpose: 
+    """
+
+    file_path = csv_file  # Update this with your file path
+    df = pd.read_csv(file_path)
+
+    # # Convert wide format to long format
+    # df_melted = df.melt(id_vars=["Days"], var_name="Year", value_name="Value")
+
+    # # Convert Year to datetime
+    # df_melted["Date"] = pd.to_datetime(df_melted["Year"], format="%Y") + pd.to_timedelta(df_melted["Days"] - 1, unit="D")
+
+    # # Drop unnecessary columns
+    # df_melted = df_melted.drop(columns=["Days", "Year"])
+
+    # Generate profile report
+    profile = ProfileReport(df, tsmode=True, sortby="Days", title="Time-Series EDA")
+
+    # Save the report
+    profile.to_file("time_series_report.html")
+
+    print("Time-Series Analysis Report Generated Successfully!")
+
+
+
+
+
 if __name__ == "__main__":
-    report(csv_file="rainfall_data_analysis/1901_1999_csv/1901uk.csv")
+    path="/home/udit/Documents/Github/ISSA/data/refine_data/fid_0_data_1901_1999.csv"
+    # report(csv_file=path)
+    time_series(csv_file=path)
+
 # end main
