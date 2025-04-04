@@ -43,3 +43,40 @@ class IndexView(View):
         
         # If successful, render the result
         return render(request, 'pandas_profiling_report.html')
+
+
+# from django.shortcuts import render
+# from django.views import View
+# from django.http import HttpResponseRedirect
+# import logging
+# import os
+# from .my_report import report
+
+# logger = logging.getLogger(__name__)
+
+# class IndexView(View):
+#     template_name = "myapp/index.html"
+
+#     def get(self, request):
+#         logger.debug("GET request received")
+#         return render(request, self.template_name)
+
+#     def post(self, request):
+#         logger.debug("POST request received")
+
+#         csv_file = request.FILES.get('csv')
+#         if not csv_file:
+#             logger.error("No file uploaded")
+#             return HttpResponse("<h1>Error: No file uploaded!</h1>", status=400)
+
+#         try:
+#             logger.info("Generating D-Tale report")
+#             dtale_url = report(csv_file)  # Get the D-Tale URL
+#             logger.info(f"Report available at: {dtale_url}")
+            
+#             # Redirect the user to the D-Tale report page
+#             return HttpResponseRedirect(dtale_url)
+
+#         except Exception as e:
+#             logger.error(f"Error during report generation: {str(e)}")
+#             return HttpResponse(f"<h1>Error: {str(e)}</h1>", status=500)
